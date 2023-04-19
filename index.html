@@ -7,14 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>나만의 메모장</title>
-
+    <script src="https://kit.fontawesome.com/6e1a70c9a1.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     <main>
         <h1>MEMO</h1>
+        <button type="button" class="btn-add"><i class="fas fa-sharp fa-light fa-circle-plus fa-2x"></i></button>
+
         <div class="container">
             <article class="memo">
+                <input type="text" id="title" placeholder="제목을 입력하세요">
+                <textarea name="" id="content" cols="32" rows="13"></textarea>
+                <button type="button" class="btn-save">메모 등록</button>
+            </article>
+            <!-- <article class="memo">
                 <h2>제목</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
             </article>
@@ -37,11 +44,7 @@
             <article class="memo">
                 <h2>제목</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
-            </article>
-            <article class="memo">
-                <h2>제목</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
-            </article>
+            </article> -->
         </div>
     </main>
     <script>

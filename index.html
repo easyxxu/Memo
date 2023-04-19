@@ -13,44 +13,110 @@
 <body>
     <main>
         <h1>MEMO</h1>
-        <button type="button" class="btn-add"><i class="fas fa-sharp fa-light fa-circle-plus fa-2x"></i></button>
-
+        <button type="button" class="btn-add" onclick="addMemo()"><i
+                class="fas fa-sharp fa-light fa-circle-plus fa-2x"></i></button>
         <div class="container">
-            <article class="memo">
+            <!-- 메모지 입력 -->
+            <!-- <article class="memo">
                 <input type="text" id="title" placeholder="제목을 입력하세요">
                 <textarea name="" id="content" cols="32" rows="13"></textarea>
-                <button type="button" class="btn-save">메모 등록</button>
-            </article>
-            <!-- <article class="memo">
-                <h2>제목</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
-            </article>
-            <article class="memo">
-                <h2>제목</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
-            </article>
-            <article class="memo">
-                <h2>제목</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
-            </article>
-            <article class="memo">
-                <h2>제목</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
-            </article>
-            <article class="memo">
-                <h2>제목</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
-            </article>
-            <article class="memo">
-                <h2>제목</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic fugiat quo illo quas illum fugit</p>
+                <button type="button" class="btn-save" onclick="saveMemo()">메모 등록</button>
             </article> -->
+            <!-- 저장된 메모지 -->
+            <!-- <article class="memo">
+                <h2>title</h2>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <button type="button" class="btn-delete" onclick="">삭제</button>
+            </article> -->
+            <!-- <article id="display"></article> -->
         </div>
     </main>
     <script>
-        const memo = []
-        memo.push('memo1')
-        localStorage.setItem('메모1', memo) //key, value
+        /**
+         * TODO : 등록한 메모지 스타일 꾸미기
+         * TODO : 메모지 추가하기 기능
+         * TODO : 메모가 삭제된 경우 1.아무것도 없으면 빈 컨테이너 2.남은 메모지만 보이게
+        */
+        let allMemo = JSON.parse(localStorage.getItem("allMemo"));
+        const container = document.querySelector(".container");
+
+        allMemo = allMemo ?? [];
+        render();
+
+        // plus 버튼을 누르면 메모지 입력 양식 추가
+        function addMemo() {
+            const memo = document.createElement("article");
+            container.appendChild(memo);
+
+            const title = document.createElement("input");
+            const content = document.createElement("textarea");
+            const saveBtn = document.createElement("button");
+
+            memo.classList.add("memo");
+            title.type = "text";
+            title.id = "title";
+            title.placeholder = "제목을 입력하세요";
+            content.id = "content";
+            content.cols = "32";
+            content.rows = "13";
+            saveBtn.type = "button";
+            saveBtn.classList.add("btn-save");
+            saveBtn.onclick = saveMemo;
+            saveBtn.textContent = "메모 저장"
+
+            memo.append(title, content, saveBtn)
+        }
+
+        const title = document.getElementById("title");
+        const content = document.getElementById("content");
+        const saveBtn = document.querySelector(".btn-save");
+        const memo = document.querySelector(".memo");
+
+        // 메모 내용 로컬 스토리지에 저장하기
+        function saveMemo() {
+            const title = document.getElementById("title").value;
+            const content = document.getElementById("content").value;
+
+            allMemo.push({ title, content, len: allMemo.length });
+
+            localStorage.setItem("allMemo", JSON.stringify(allMemo));
+            render();
+        }
+        // 저장된 메모 불러오기
+        function render() {
+            // memo.innerHTML = "";
+
+            for (const item of allMemo) {
+                const saveTitle = document.createElement("h2");
+                const saveContent = document.createElement("p");
+                const saveId = document.createElement("p");
+                const deleteBtn = document.createElement("button");
+
+                saveTitle.textContent = item.title;
+                saveContent.textContent = item.content;
+                saveId.textContent = item.len + 1;
+                deleteBtn.textContent = "삭제";
+                deleteBtn.setAttribute("id", item.len);
+                deleteBtn.setAttribute("onclick", "remove()");
+
+                memo.appendChild(saveId);
+                memo.appendChild(saveTitle);
+                memo.appendChild(saveContent);
+                memo.appendChild(deleteBtn);
+
+                saveTitle.classList.add("title")
+            }
+        }
+
+        function remove() {
+            const idx = allMemo.find(item => item.len == event.srcElement.id);
+            if (idx) {
+                allMemo.splice(allMemo.findIndex(item => item.len == idx.len), 1);
+            }
+            localStorage.setItem("allMemo", JSON.stringify(allMemo));
+            render();
+        }
+
     </script>
 </body>
 

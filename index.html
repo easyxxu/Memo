@@ -43,12 +43,12 @@
         savedMemo.classList.add("saved-memo");
 
         allMemo = allMemo ?? [];
-        // render();
-        savedRender(); // 저장된 메모 불러오기
+        render();
+        // savedRender(); // 저장된 메모 불러오기
 
-        // 저장된 메모 불러오기
+        //저장된 메모 불러오기
         function savedRender() {
-            container.appendChild(savedMemo);
+            // container.appendChild(savedMemo);
             for (const item of allMemo) {
                 const saveTitle = document.createElement("h2");
                 const saveContent = document.createElement("p");
@@ -114,39 +114,70 @@
 
         //입력폼에서 저장 후 저장된 메모 불러오기
         function render() {
-            const memo = document.querySelector(".memo");
+            const memos = document.querySelectorAll(".memo");
+            for (let i = 0; i < memos.length; i++) {
+                for (let item = 0; item < allMemo.length; item++) {
+                    if (i == item) {
+                        memos[i].innerHTML = "";
+                        const saveTitle = document.createElement("h2");
+                        const saveContent = document.createElement("p");
+                        // const saveId = document.createElement("p");
+                        const deleteBtn = document.createElement("button");
 
-            memo.innerHTML = "";
+                        saveTitle.textContent = allMemo[item].title;
+                        saveTitle.classList.add("title-memo");
 
-            for (const item of allMemo) {
+                        saveContent.textContent = allMemo[item].content;
+                        saveContent.classList.add("content-memo");
 
-                const saveTitle = document.createElement("h2");
-                const saveContent = document.createElement("p");
-                // const saveId = document.createElement("p");
-                const deleteBtn = document.createElement("button");
+                        // saveId.textContent = item.len + 1;
+                        deleteBtn.textContent = "삭제";
+                        deleteBtn.setAttribute("id", allMemo[item].len);
+                        deleteBtn.setAttribute("onclick", "remove()");
 
-                saveTitle.textContent = item.title;
-                saveTitle.classList.add("title-memo");
-
-                saveContent.textContent = item.content;
-                saveContent.classList.add("content-memo");
-
-                // saveId.textContent = item.len + 1;
-                deleteBtn.textContent = "삭제";
-                deleteBtn.setAttribute("id", item.len);
-                deleteBtn.setAttribute("onclick", "remove()");
-
-                // memo.appendChild(saveId);
-                memo.appendChild(saveTitle);
-                memo.appendChild(saveContent);
-                memo.appendChild(deleteBtn);
+                        // memo.appendChild(saveId);
+                        memos[i].appendChild(saveTitle);
+                        memos[i].appendChild(saveContent);
+                        memos[i].appendChild(deleteBtn);
+                    }
+                }
             }
+
+            // for (const item of allMemo) {
+            //     const memoContainer = document.createElement("article");
+            //     memoContainer.classList.add("memo")
+            //     container.appendChild(memoContainer);
+
+            //     const saveTitle = document.createElement("h2");
+            //     const saveContent = document.createElement("p");
+            //     // const saveId = document.createElement("p");
+            //     const deleteBtn = document.createElement("button");
+
+            //     saveTitle.textContent = item.title;
+            //     saveTitle.classList.add("title-memo");
+
+            //     saveContent.textContent = item.content;
+            //     saveContent.classList.add("content-memo");
+
+            //     // saveId.textContent = item.len + 1;
+            //     deleteBtn.textContent = "삭제";
+            //     deleteBtn.setAttribute("id", item.len);
+            //     deleteBtn.setAttribute("onclick", "remove()");
+
+            //     // memo.appendChild(saveId);
+            //     memoContainer.appendChild(saveTitle);
+            //     memoContainer.appendChild(saveContent);
+            //     memoContainer.appendChild(deleteBtn);
+            // }
         }
         // 메모 삭제
         function remove() {
+            //srcElement : 이벤트가 발생한 개체를 반환/설정
             const idx = allMemo.find(item => item.len == event.srcElement.id);
+            console.log("idx : ", idx)//삭제할 대상
             if (idx) {
-                allMemo.splice(allMemo.findIndex(item => item.len == idx.len), 1);
+                allMemo.splice(allMemo.findIndex(item => item.len == idx.len), 1);//allMemo의 요소의 len과 삭제할 아이템의 len이 같은 인덱스에서 1개 요소 제거
+                memo.remove;
             }
             localStorage.setItem("allMemo", JSON.stringify(allMemo));
             render();

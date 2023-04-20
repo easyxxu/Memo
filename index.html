@@ -39,9 +39,36 @@
         */
         let allMemo = JSON.parse(localStorage.getItem("allMemo"));
         const container = document.querySelector(".container");
+        const savedMemo = document.createElement("article");
+        savedMemo.classList.add("saved-memo");
 
         allMemo = allMemo ?? [];
-        render();
+        // render();
+        savedRender(); // 저장된 메모 불러오기
+
+        // 저장된 메모 불러오기
+        function savedRender() {
+            container.appendChild(savedMemo);
+            for (const item of allMemo) {
+                const saveTitle = document.createElement("h2");
+                const saveContent = document.createElement("p");
+                const deleteBtn = document.createElement("button");
+                saveTitle.textContent = item.title;
+                saveTitle.classList.add("title-memo");
+
+                saveContent.textContent = item.content;
+                saveContent.classList.add("content-memo");
+
+                deleteBtn.textContent = "삭제";
+                deleteBtn.setAttribute("id", item.len);
+                deleteBtn.setAttribute("onclick", "remove()");
+
+                savedMemo.appendChild(saveTitle);
+                savedMemo.appendChild(saveContent);
+                savedMemo.appendChild(deleteBtn);
+            }
+
+        }
 
         // plus 버튼을 누르면 메모지 입력 양식 추가
         function addMemo() {
@@ -54,11 +81,13 @@
 
             memo.classList.add("memo");
             title.type = "text";
-            title.id = "title";
+            title.id = "title-input";
             title.placeholder = "제목을 입력하세요";
-            content.id = "content";
+
+            content.id = "content-input";
             content.cols = "32";
             content.rows = "13";
+
             saveBtn.type = "button";
             saveBtn.classList.add("btn-save");
             saveBtn.onclick = saveMemo;
@@ -74,40 +103,46 @@
 
         // 메모 내용 로컬 스토리지에 저장하기
         function saveMemo() {
-            const title = document.getElementById("title").value;
-            const content = document.getElementById("content").value;
+            const title = document.getElementById("title-input").value;
+            const content = document.getElementById("content-input").value;
 
             allMemo.push({ title, content, len: allMemo.length });
 
             localStorage.setItem("allMemo", JSON.stringify(allMemo));
             render();
         }
-        // 저장된 메모 불러오기
+
+        //입력폼에서 저장 후 저장된 메모 불러오기
         function render() {
-            // memo.innerHTML = "";
+            const memo = document.querySelector(".memo");
+
+            memo.innerHTML = "";
 
             for (const item of allMemo) {
+
                 const saveTitle = document.createElement("h2");
                 const saveContent = document.createElement("p");
-                const saveId = document.createElement("p");
+                // const saveId = document.createElement("p");
                 const deleteBtn = document.createElement("button");
 
                 saveTitle.textContent = item.title;
+                saveTitle.classList.add("title-memo");
+
                 saveContent.textContent = item.content;
-                saveId.textContent = item.len + 1;
+                saveContent.classList.add("content-memo");
+
+                // saveId.textContent = item.len + 1;
                 deleteBtn.textContent = "삭제";
                 deleteBtn.setAttribute("id", item.len);
                 deleteBtn.setAttribute("onclick", "remove()");
 
-                memo.appendChild(saveId);
+                // memo.appendChild(saveId);
                 memo.appendChild(saveTitle);
                 memo.appendChild(saveContent);
                 memo.appendChild(deleteBtn);
-
-                saveTitle.classList.add("title")
             }
         }
-
+        // 메모 삭제
         function remove() {
             const idx = allMemo.find(item => item.len == event.srcElement.id);
             if (idx) {

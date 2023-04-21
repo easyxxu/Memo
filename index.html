@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>나만의 메모장</title>
+    <title>📋 MY MEMO</title>
     <script src="https://kit.fontawesome.com/6e1a70c9a1.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
     <!-- <link rel="icon" href="./favicon.ico" type="image/x-icon"> -->
@@ -18,7 +18,6 @@
         <h1>MEMO</h1>
         <button type="button" class="btn-add" onclick="addMemo()">
             <img src="./btnAdd.png" alt="메모입력폼추가">
-            <!-- <i class="fas fa-sharp fa-light fa-circle-plus fa-2x"></i> -->
         </button>
         <div class="container">
         </div>
@@ -27,6 +26,7 @@
         let allMemo = JSON.parse(localStorage.getItem("allMemo"));
         const container = document.querySelector(".container");
         const memoInput = document.getElementById("memo-input");
+        let colorMemo = ["color1", "color2", "color3", "color4"];
 
         allMemo = allMemo ?? [];
         render();
@@ -56,16 +56,15 @@
             saveBtn.type = "text";
             saveBtn.classList.add("btn-save");
             saveBtn.onclick = saveMemo;
-            saveBtn.textContent = "메모 저장"
+            saveBtn.textContent = "메모 저장";
 
-            form.append(title, content, saveBtn)
+            form.append(title, content, saveBtn);
         }
 
         // 메모 내용 로컬 스토리지에 저장하기
         function saveMemo() {
             const title = document.getElementById("title-input").value;
             const content = document.getElementById("content-input").value;
-            console.log(title)
             allMemo.push({ title, content, len: allMemo.length });
 
             localStorage.setItem("allMemo", JSON.stringify(allMemo));
@@ -110,9 +109,11 @@
 
                 container.append(memo);
                 const memos = document.querySelectorAll(".memo");
+                let randomColor = Math.floor(Math.random() * colorMemo.length);
 
                 for (let i = 0; i < memos.length; i++) {
                     if (i === item) {
+                        memo.classList.add(colorMemo[randomColor]);
                         const saveTitle = document.createElement("h2");
                         const saveContent = document.createElement("p");
                         const deleteBtn = document.createElement("button");
@@ -122,11 +123,10 @@
                         saveContent.innerText = allMemo[item].content;
                         saveContent.classList.add("content-memo");
 
-                        deleteBtn.textContent = "삭제";
+                        deleteBtn.textContent = "Delete";
                         deleteBtn.classList.add("btn-delete");
                         deleteBtn.setAttribute("id", allMemo[item].len);
                         deleteBtn.setAttribute("onclick", "remove()");
-                        // deleteBtn.setAttribute("type", "submit")
                         memo.appendChild(saveTitle);
                         memo.appendChild(saveContent);
                         memo.appendChild(deleteBtn);
@@ -144,7 +144,7 @@
         function remove() {
             //srcElement : 이벤트가 발생한 개체를 반환/설정
             const idx = allMemo.find(item => item.len == event.srcElement.id);
-            console.log("idx : ", idx)//삭제할 대상
+            //console.log("idx : ", idx)//삭제할 대상
             if (idx) {
                 allMemo.splice(allMemo.findIndex(item => item.len == idx.len), 1);//allMemo의 요소의 len과 삭제할 아이템의 len이 같은 인덱스에서 1개 요소 제거
             }

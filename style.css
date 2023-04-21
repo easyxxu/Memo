@@ -30,29 +30,28 @@ h1 {
 }
 .btn-add {
   position: absolute;
-  top: 7px;
+  top: 8px;
   left: 148px;
   background: #fff;
-  width: 50px;
-  height: 50px;
   color: #86b583;
+}
+.btn-add img {
+  width: 45px;
+  height: 45px;
 }
 .container {
   display: grid;
-  padding: 30px;
+  padding: 60px;
   grid-template-columns: repeat(4, 300px);
   gap: 20px;
   border: 1px solid #bdbdbd;
-  height: 80vh;
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
-.memo,
-.saved-memo {
-  /* visibility: hidden; */
+.memo {
   width: 300px;
   height: 300px;
   background-color: #fdf7bc;
@@ -63,8 +62,10 @@ h1 {
   flex-direction: column;
   gap: 10px;
 }
-#title-input {
-  /* margin-bottom: 10px; */
+.form-memo {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
 }
 .title-memo {
   margin: 5px 0;
@@ -83,4 +84,16 @@ h1 {
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
+}
+.btn-delete {
+  align-self: flex-end;
+  width: 100px;
+  padding: 7px;
+  background: #86b583;
+  border: 1px solid #bdbdbd;
+  border-radius: 25px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  -ms-border-radius: 25px;
+  -o-border-radius: 25px;
 }

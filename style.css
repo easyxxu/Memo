@@ -41,9 +41,9 @@ h1 {
 }
 .container {
   display: grid;
-  padding: 50px;
-  grid-template-columns: repeat(4, 300px);
-  gap: 30px;
+  padding: 50px 80px;
+  grid-template-columns: repeat(5, 300px);
+  gap: 50px;
   border: 1px solid #bdbdbd;
   border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -110,4 +110,33 @@ h1 {
 }
 .color4 {
   background: #fdf7bc;
+}
+
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .container {
+    padding: 50px;
+    grid-template-columns: repeat(4, 300px);
+    gap: 30px;
+  }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container {
+    padding: 27px 15px;
+    grid-template-columns: repeat(3, 300px);
+    gap: 25px;
+  }
+}
+@media (min-width: 501px) and (max-width: 768px) {
+  .container {
+    padding: 27px 30px;
+    grid-template-columns: repeat(2, 320px);
+    gap: 40px;
+  }
+}
+@media (max-width: 500px) {
+  .container {
+    padding: 50px 30px;
+    grid-template-columns: 300px;
+    justify-content: center;
+  }
 }

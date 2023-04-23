@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "ClimateCrisisKR-1979";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/ClimateCrisisKR-1979.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "LeeSeoyun";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
 body,
 h1,
 h2,
@@ -5,12 +19,14 @@ p {
   margin: 0;
 }
 body {
-  margin: 30px 20px;
+  background: #c4d9b0;
 }
 button {
   border: 0;
   outline: 0;
   cursor: pointer;
+  padding: 0;
+  background: inherit;
 }
 input {
   background: inherit;
@@ -21,19 +37,24 @@ textarea {
   background: inherit;
   border: 1px solid #bdbdbd;
 }
-h1 {
-  position: absolute;
-  top: 10px;
-  left: 40px;
-  background: #fff;
-  padding: 5px;
+main {
+  padding: 30px 0;
 }
-.btn-add {
-  position: absolute;
-  top: 8px;
-  left: 148px;
-  background: #fff;
-  color: #86b583;
+h1 {
+  font-family: "ClimateCrisisKR-1979";
+  width: 500px;
+  font-size: 60px;
+  background: #fdf7bc;
+  color: rgb(34, 32, 32);
+  padding: 5px;
+  margin: 0 auto;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 .btn-add img {
   width: 45px;
@@ -44,65 +65,64 @@ h1 {
   padding: 50px 80px;
   grid-template-columns: repeat(5, 300px);
   gap: 50px;
-  border: 1px solid #bdbdbd;
-  border-radius: 10px;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  -ms-border-radius: 10px;
-  -o-border-radius: 10px;
 }
 .memo {
+  font-family: "LeeSeoyun";
+  line-height: 17px;
   width: 300px;
   height: 300px;
   background-color: #fdf7bc;
-  padding: 10px;
+  padding: 15px;
   box-sizing: border-box;
   box-shadow: 5px 5px 10px -5px #333;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 10px;
+  color: rgb(34, 32, 32);
 }
 .form-memo {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   flex-direction: column;
 }
 .form-memo textarea {
   height: 206px;
-  width: 276px;
-}
-.title-memo {
-  margin: 5px 0;
+  width: 263px;
 }
 .content-memo {
-  height: 190px;
+  height: 189px;
   overflow: auto;
 }
 .btn-save {
+  font-family: "ClimateCrisisKR-1979";
+  letter-spacing: 2px;
+  font-size: 16px;
   background: #86b583;
   color: #fff;
-  width: 100px;
-  height: 30px;
+  width: 170px;
   padding: 5px;
   align-self: center;
-  border-radius: 15px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 .btn-delete {
+  font-family: "ClimateCrisisKR-1979";
+  letter-spacing: 2px;
+  font-size: 16px;
   align-self: center;
-  width: 60px;
+  width: 170px;
   padding: 7px;
   background: #86b583;
   color: #fff;
-  border-radius: 15px;
-  -webkit-border-radius: 15px;
-  -moz-border-radius: 15px;
-  -ms-border-radius: 15px;
-  -o-border-radius: 15px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 .color1 {
   background: #d2dbe8;

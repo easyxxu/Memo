@@ -14,9 +14,6 @@
 <body>
     <main>
         <h1 onclick="addMemo()">MEMO</h1>
-        <!-- <button type="button" class="btn-add" onclick="addMemo()">
-            <img src="./btnAdd.png" alt="메모입력폼추가">
-        </button> -->
         <div class="container">
         </div>
     </main>
@@ -41,19 +38,19 @@
             const saveBtn = document.createElement("button");
 
             memo.classList.add("memo");
-            memo.setAttribute("id", "memo-input")
+            memo.setAttribute("id", "memo-input");
+
             form.classList.add("form-memo");
-            title.type = "text";
-            title.id = "title-input";
-            title.placeholder = "제목을 입력하세요";
 
-            content.id = "content-input";
-            content.cols = "32";
-            content.rows = "13";
+            title.setAttribute("type", "text");
+            title.setAttribute("id", "title-input");
+            title.setAttribute("placeholder", "제목을 입력하세요");
 
-            saveBtn.type = "text";
+            content.setAttribute("id", "content-input");
+
             saveBtn.classList.add("btn-save");
-            saveBtn.onclick = saveMemo;
+            saveBtn.setAttribute("type", "text");
+            saveBtn.setAttribute("onclick", "saveMemo()");
             saveBtn.textContent = "SAVE";
 
             form.append(title, content, saveBtn);
@@ -71,20 +68,6 @@
 
         //입력폼에서 저장 후 저장된 메모 불러오기
         function render() {
-            /**
-             * ! 건들던 부분 -> allMemo의 길이와 동일하게 메모지 생성까진 완료 하지만 내용은 안뜸 (해결완료: 내용 뜸)
-             * ! 위를 해결하면 생기는 문제 : 새로운 메모를 작성하면 빈 메모가 넘 많이생김
-             * */
-            // 문제: 메모지가 있어야만 렌더가 됨
-            // allMemo.length만큼 메모지 생성해주기
-            // if(allMemo.length > 0 && )
-            // for (let i = 0; i < allMemo.length; i++) {
-            //     const memo = document.createElement("article");
-            //     memo.classList.add("memo");
-            //     container.append(memo);
-            // }
-            // container.removeChild(memoInput)
-            // 메모지 수와 allMemo의 인덱스가 같으면 저장된 메모 출력
             for (let item = 0; item < allMemo.length; item++) {
                 const memo = document.createElement("article");
                 memo.classList.add("memo");
@@ -93,17 +76,6 @@
                 const inputTitle = document.getElementById("title-input");
                 const inputContent = document.getElementById("content-input");
                 const btnSave = document.querySelector(".btn-save");
-
-                // 메모지 개수랑 저장된 메모 개수가 동일하다면 추가 메모지 생성할 필요없음
-
-                // for (let i = 0; i <= allMemo.length; i++) {
-                //     if (document.querySelector(".container").children.length > 0) {
-                //         if (document.querySelector(".container").children[i].className === 'memo-input') {
-                //             container.removeChild(memoInput)
-                //             container.append(memo);
-                //         }
-                //     }
-                // }
 
                 container.append(memo);
                 const memos = document.querySelectorAll(".memo");
@@ -121,10 +93,11 @@
                         saveContent.innerText = allMemo[item].content;
                         saveContent.classList.add("content-memo");
 
-                        deleteBtn.textContent = "DELETE";
                         deleteBtn.classList.add("btn-delete");
                         deleteBtn.setAttribute("id", allMemo[item].len);
                         deleteBtn.setAttribute("onclick", "remove()");
+                        deleteBtn.textContent = "DELETE";
+
                         memo.appendChild(saveTitle);
                         memo.appendChild(saveContent);
                         memo.appendChild(deleteBtn);
@@ -140,11 +113,9 @@
         }
         // 메모 삭제
         function remove() {
-            //srcElement : 이벤트가 발생한 개체를 반환/설정
             const idx = allMemo.find(item => item.len == event.srcElement.id);
-            //console.log("idx : ", idx)//삭제할 대상
             if (idx) {
-                allMemo.splice(allMemo.findIndex(item => item.len == idx.len), 1);//allMemo의 요소의 len과 삭제할 아이템의 len이 같은 인덱스에서 1개 요소 제거
+                allMemo.splice(allMemo.findIndex(item => item.len == idx.len), 1);
             }
             localStorage.setItem("allMemo", JSON.stringify(allMemo));
             render();

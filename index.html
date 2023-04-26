@@ -20,8 +20,7 @@
     <script>
         let allMemo = JSON.parse(localStorage.getItem("allMemo"));
         const container = document.querySelector(".container");
-        const memoInput = document.getElementById("memo-input");
-        let colorMemo = ["color1", "color2", "color3", "color4"];
+
 
         allMemo = allMemo ?? [];
         render();
@@ -60,7 +59,9 @@
         function saveMemo() {
             const title = document.getElementById("title-input").value;
             const content = document.getElementById("content-input").value;
-            allMemo.push({ title, content, len: allMemo.length });
+            let colorMemo = ["color1", "color2", "color3", "color4"];
+            let randomColor = Math.floor(Math.random() * colorMemo.length);
+            allMemo.push({ title, content, len: allMemo.length, color: colorMemo[randomColor] });
 
             localStorage.setItem("allMemo", JSON.stringify(allMemo));
             render();
@@ -79,11 +80,9 @@
 
                 container.append(memo);
                 const memos = document.querySelectorAll(".memo");
-                let randomColor = Math.floor(Math.random() * colorMemo.length);
 
                 for (let i = 0; i < memos.length; i++) {
                     if (i === item) {
-                        memo.classList.add(colorMemo[randomColor]);
                         const saveTitle = document.createElement("h2");
                         const saveContent = document.createElement("p");
                         const deleteBtn = document.createElement("button");
@@ -97,7 +96,7 @@
                         deleteBtn.setAttribute("id", allMemo[item].len);
                         deleteBtn.setAttribute("onclick", "remove()");
                         deleteBtn.textContent = "DELETE";
-
+                        memo.classList.add(allMemo[item].color);
                         memo.appendChild(saveTitle);
                         memo.appendChild(saveContent);
                         memo.appendChild(deleteBtn);

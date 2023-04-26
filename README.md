@@ -1,6 +1,6 @@
 # Memo
 실행 페이지 : https://easyxxu.github.io/Memo/
-
+## 메모지 사용방법
 ### 메모지 추가
 ![메모지 추가](https://user-images.githubusercontent.com/107910342/233936349-33217b0f-adb8-4ee2-872f-4a2884a7f43f.png)
 -> 상단의 "MEMO"를 클릭하면 메모지가 추가됩니다.

@@ -71,13 +71,8 @@
             for (let item = 0; item < allMemo.length; item++) {
                 const memo = document.createElement("article");
                 memo.classList.add("memo");
-
-                const memoInput = document.querySelector(".memo-input");
-                const inputTitle = document.getElementById("title-input");
-                const inputContent = document.getElementById("content-input");
-                const btnSave = document.querySelector(".btn-save");
-
                 container.append(memo);
+
                 const memos = document.querySelectorAll(".memo");
 
                 for (let i = 0; i < memos.length; i++) {
